@@ -14,7 +14,7 @@ scale = Vector2(1.5, 1.5)
 texture = SubResource("CompressedTexture2D_7xaro")
 script = ExtResource("1_7k104")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=213746753]
+[node name="Hitbox" type="Area2D" parent="." unique_id=213746753 groups=["Enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1905895864]
 visible = false
