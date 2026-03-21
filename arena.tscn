@@ -2,9 +2,24 @@
 
 [ext_resource type="Script" uid="uid://jdoeey4m1ohl" path="res://arena.gd" id="1_444vf"]
 [ext_resource type="PackedScene" uid="uid://dwnojc7xl5qct" path="res://player.tscn" id="2_27ga2"]
+[ext_resource type="PackedScene" uid="uid://mtagaavlb06m" path="res://enemy.tscn" id="3_27ga2"]
+
+[sub_resource type="Environment" id="Environment_444vf"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.8
+glow_strength = 1.5
+glow_bloom = 0.15
+glow_blend_mode = 0
 
 [node name="Arena" type="Node2D" unique_id=377620413]
 script = ExtResource("1_444vf")
 
 [node name="Player" parent="." unique_id=522150696 instance=ExtResource("2_27ga2")]
 position = Vector2(320, 180)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=850283304]
+environment = SubResource("Environment_444vf")
+
+[node name="Enemy" parent="." unique_id=127804031 instance=ExtResource("3_27ga2")]
+position = Vector2(110, 112)
