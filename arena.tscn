@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dwnojc7xl5qct" path="res://player.tscn" id="2_27ga2"]
 [ext_resource type="FontFile" uid="uid://cvc2tx4okk1bt" path="res://Font.ttf" id="3_27ga2"]
 [ext_resource type="Script" uid="uid://df5tjburwjvqv" path="res://score.gd" id="4_h0wof"]
+[ext_resource type="Script" uid="uid://8goa4847mfwu" path="res://highscore.gd" id="5_fu4bq"]
 
 [sub_resource type="Environment" id="Environment_444vf"]
 background_mode = 3
@@ -23,6 +24,10 @@ position = Vector2(320, 180)
 environment = SubResource("Environment_444vf")
 
 [node name="Enemy_spawn_timer" type="Timer" parent="." unique_id=437036557]
+wait_time = 3.0
+autostart = true
+
+[node name="Difficulty_timer" type="Timer" parent="." unique_id=1409371534]
 autostart = true
 
 [node name="UI" type="Node2D" parent="." unique_id=56607065]
@@ -42,9 +47,28 @@ offset_bottom = 140.565
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("3_27ga2")
 theme_override_font_sizes/font_size = 96
-text = "100"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_h0wof")
 
+[node name="Highscore" type="Label" parent="UI/Control" unique_id=1657823987]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 1280.0
+offset_bottom = 44.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_27ga2")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_fu4bq")
+
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
