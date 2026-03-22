@@ -14,6 +14,9 @@ glow_strength = 1.5
 glow_bloom = 0.15
 glow_blend_mode = 0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu4bq"]
+bg_color = Color(1, 0.8666667, 0, 1)
+
 [node name="Arena" type="Node2D" unique_id=377620413]
 script = ExtResource("1_444vf")
 
@@ -104,6 +107,17 @@ offset_bottom = 265.0
 theme_override_fonts/font = ExtResource("3_27ga2")
 theme_override_font_sizes/font_size = 32
 text = "MENU GŁÓWNE"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1268783506]
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD" unique_id=539799215]
+offset_left = 20.0
+offset_top = 330.0
+offset_right = 270.0
+offset_bottom = 357.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/fill = SubResource("StyleBoxFlat_fu4bq")
+value = 100.0
 
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
