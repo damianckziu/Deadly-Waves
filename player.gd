@@ -36,7 +36,7 @@ func _on_Reload_speed_timeout():
 	can_shoot = true
 
 func _on_hitbox_area_entered(area):
-	if area.is_in_group("Enemy"):
+	if area.is_in_group("Enemy") and is_dead == false:
 		is_dead = true
 		visible = false
 		
