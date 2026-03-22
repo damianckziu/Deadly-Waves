@@ -18,7 +18,7 @@ offset_right = 481.0
 offset_bottom = 81.0
 theme_override_fonts/font = ExtResource("2_mae5d")
 theme_override_font_sizes/font_size = 64
-text = "DEADLY DISCO"
+text = "DEADLY WAVES"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=1138039236]

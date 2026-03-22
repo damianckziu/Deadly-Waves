@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Deadly Disco"
+config/name="Deadly Waves"
 run/main_scene="uid://d207p64aysb6j"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
