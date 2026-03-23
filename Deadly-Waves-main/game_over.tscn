@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dycj7saingbxa"]
+
+[ext_resource type="Script" uid="uid://csepika21ml6q" path="res://game_over.gd" id="1_yxx3c"]
+[ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="2_yxx3c"]
+
+[node name="game_over" type="Node2D" unique_id=2029672100]
+script = ExtResource("1_yxx3c")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=443317110]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=55731250]
+offset_left = 57.0
+offset_top = 30.0
+offset_right = 583.0
+offset_bottom = 92.0
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 48
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1831668122]
+offset_left = 98.0
+offset_top = 145.0
+offset_right = 542.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 36
+text = "ZAGRAJ PONOWNIE
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

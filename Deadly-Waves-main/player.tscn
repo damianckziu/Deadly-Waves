@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dwnojc7xl5qct"]
+
+[ext_resource type="Texture2D" uid="uid://bppby2qoxt2he" path="res://Square.png" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://qamdbm4pyegc" path="res://player.gd" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(16, 16)
+
+[node name="Player" type="Sprite2D" unique_id=522150696]
+modulate = Color(0, 0, 1, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_onrkg")
+script = ExtResource("2_i3pqv")
+
+[node name="Reload_speed" type="Timer" parent="." unique_id=816018489]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1016861001]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1499813573]
+visible = false
+shape = SubResource("RectangleShape2D_onrkg")
+
+[connection signal="timeout" from="Reload_speed" to="." method="_on_Reload_speed_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d207p64aysb6j"]
+
+[ext_resource type="Script" uid="uid://jeexf2djh3s1" path="res://menu.gd" id="1_ouk20"]
+[ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="2_ouk20"]
+
+[node name="menu" type="Node2D" unique_id=66096135]
+script = ExtResource("1_ouk20")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1933778427]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=529722906]
+offset_left = 74.0
+offset_top = 30.0
+offset_right = 566.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 48
+text = "DEADLY WAVES"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1138039236]
+offset_left = 221.0
+offset_top = 145.0
+offset_right = 419.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 36
+text = "ZAGRAJ
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
