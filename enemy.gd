@@ -19,6 +19,8 @@ func _process(delta):
 	 
 	if hp <= 0:
 		Global.points += 10
+		if Global.arena != null:
+			Global.arena.get_node("DeathSound").play()
 		if Global.node_creation_parent != null:
 			var blood_particles_instance = Global.instance_node(blood_particles, global_position, Global.node_creation_parent)
 			blood_particles_instance.rotation = velocity.angle()

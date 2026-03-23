@@ -2,6 +2,7 @@ extends Node
 
 var node_creation_parent = null
 var player = null
+var arena = null
 
 var points = 0
 var highscore = 0

@@ -5,6 +5,7 @@ var enemy_1 = preload("res://enemy.tscn")
 func _ready():
 	Global.node_creation_parent = self
 	Global.points = 0
+	Global.arena = self
 	$PauseMenu.visible = false
 
 func _exit_tree():

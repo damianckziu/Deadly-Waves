@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bppby2qoxt2he" path="res://Square.png" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://qamdbm4pyegc" path="res://player.gd" id="2_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://b4flnv8uq80yi" path="res://shoot.mp3" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
@@ -21,6 +22,10 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1499813573]
 visible = false
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="." unique_id=1483445300]
+stream = ExtResource("3_i3pqv")
+volume_db = -7.5
 
 [connection signal="timeout" from="Reload_speed" to="." method="_on_Reload_speed_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

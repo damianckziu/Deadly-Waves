@@ -54,6 +54,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("click") and Global.node_creation_parent != null and can_shoot and is_dead == false:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
+		$ShootSound.play()
 		$Reload_speed.start()
 		can_shoot = false
 
@@ -66,9 +67,10 @@ func _on_hitbox_area_entered(area):
 		visible = false
 		
 		if Global.node_creation_parent != null:
+			Global.arena.get_node("LoseSound").play()
 			var blood = Global.instance_node(blood_particles, global_position, Global.node_creation_parent)
-			blood.color = Color("1e90ff")
+			blood.color = Color("006ac4c8")
 			blood.rotation = velocity.angle()
 		
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(2).timeout
 		get_tree().change_scene_to_file("res://game_over.tscn")

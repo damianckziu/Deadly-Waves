@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://jdoeey4m1ohl" path="res://arena.gd" id="1_444vf"]
 [ext_resource type="PackedScene" uid="uid://dwnojc7xl5qct" path="res://player.tscn" id="2_27ga2"]
-[ext_resource type="FontFile" uid="uid://cvc2tx4okk1bt" path="res://Font.ttf" id="3_27ga2"]
 [ext_resource type="Script" uid="uid://df5tjburwjvqv" path="res://score.gd" id="4_h0wof"]
 [ext_resource type="Script" uid="uid://8goa4847mfwu" path="res://highscore.gd" id="5_fu4bq"]
+[ext_resource type="AudioStream" uid="uid://cfgux14nfp60y" path="res://death.mp3" id="6_pbtuc"]
+[ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="6_sbb53"]
+[ext_resource type="AudioStream" uid="uid://bchtttllrlfb3" path="res://lose.mp3" id="7_pbtuc"]
 
 [sub_resource type="Environment" id="Environment_444vf"]
 background_mode = 3
@@ -14,8 +16,19 @@ glow_strength = 1.5
 glow_bloom = 0.15
 glow_blend_mode = 0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sbb53"]
+bg_color = Color(0.06879826, 0.06879829, 0.06879823, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu4bq"]
 bg_color = Color(1, 0.8666667, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Arena" type="Node2D" unique_id=377620413]
 script = ExtResource("1_444vf")
@@ -45,11 +58,11 @@ offset_bottom = 360.0
 [node name="Score" type="Label" parent="UI/Control" unique_id=2062854955]
 layout_mode = 0
 offset_top = -4.435
-offset_right = 1280.0
+offset_right = 1599.9999
 offset_bottom = 140.565
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("3_27ga2")
-theme_override_font_sizes/font_size = 96
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("6_sbb53")
+theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -61,12 +74,12 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -45.0
-offset_right = 1280.0
+offset_right = 1599.9999
 offset_bottom = 44.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_27ga2")
+theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
@@ -82,31 +95,34 @@ offset_bottom = 360.0
 color = Color(0, 0, 0, 0.5882353)
 
 [node name="Label" type="Label" parent="PauseMenu" unique_id=1618228368]
-offset_top = 70.0
-offset_right = 640.0
-offset_bottom = 139.0
-theme_override_fonts/font = ExtResource("3_27ga2")
+offset_left = 164.5
+offset_top = 71.0
+offset_right = 475.5
+offset_bottom = 143.0
+theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 64
 text = "PAUZA"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="PauseMenu" unique_id=798615530]
-offset_left = 241.0
-offset_top = 162.0
-offset_right = 395.0
-offset_bottom = 205.0
-theme_override_fonts/font = ExtResource("3_27ga2")
+offset_left = 189.5
+offset_top = 197.0
+offset_right = 450.5
+offset_bottom = 241.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 32
-text = "WRÓĆ DO GRY"
+text = "KONTYNUUJ"
 
 [node name="Button2" type="Button" parent="PauseMenu" unique_id=956648068]
-offset_left = 241.0
-offset_top = 222.0
-offset_right = 395.0
-offset_bottom = 265.0
-theme_override_fonts/font = ExtResource("3_27ga2")
+offset_left = 257.5
+offset_top = 254.0
+offset_right = 382.5
+offset_bottom = 298.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 32
-text = "MENU GŁÓWNE"
+text = "MENU"
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1268783506]
 
@@ -116,8 +132,28 @@ offset_top = 330.0
 offset_right = 270.0
 offset_bottom = 357.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("6_sbb53")
+theme_override_styles/background = SubResource("StyleBoxFlat_sbb53")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fu4bq")
 value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/StaminaBar" unique_id=165558943]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 250.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("6_sbb53")
+text = "STAMINA"
+horizontal_alignment = 1
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=148093410]
+stream = ExtResource("6_pbtuc")
+volume_db = -27.5
+
+[node name="LoseSound" type="AudioStreamPlayer" parent="." unique_id=2093226572]
+stream = ExtResource("7_pbtuc")
+volume_db = -5.0
 
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
