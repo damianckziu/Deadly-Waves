@@ -33,4 +33,20 @@ theme_override_font_sizes/font_size = 36
 text = "ZAGRAJ PONOWNIE
 "
 
+[node name="PointsLabel" type="Label" parent="." unique_id=1457846561]
+offset_top = 229.0
+offset_right = 640.0
+offset_bottom = 265.0
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="WaveLabel" type="Label" parent="." unique_id=959875118]
+offset_top = 292.0
+offset_right = 640.0
+offset_bottom = 328.0
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

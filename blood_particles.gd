@@ -1,6 +1,6 @@
 extends CPUParticles2D
 
-var fade_speed = 0.067
+var fade_speed = 0.125
 
 func _process(delta):
 	modulate.a -= fade_speed * delta
