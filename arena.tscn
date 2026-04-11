@@ -32,7 +32,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbtuc"]
-bg_color = Color(0, 0, 1, 1)
+bg_color = Color(0.50980395, 0.6666667, 1, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -159,7 +159,7 @@ process_mode = 3
 [node name="ColorRect" type="ColorRect" parent="PauseMenu" unique_id=272368556]
 offset_right = 640.0
 offset_bottom = 360.0
-color = Color(0, 0, 0, 0.5882353)
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="PauseMenu" unique_id=1618228368]
 offset_left = 164.5

@@ -13,6 +13,7 @@ var stamina_depleted = false
 var shield_active = false
 var shield_time = 0.0
 var shield_max = 100.0
+var shield_blink = 0.0
 
 func _ready():
 	Global.player = self
@@ -57,6 +58,13 @@ func _process(delta):
 		shield_time = max(shield_time, 0)
 		if Global.node_creation_parent != null:
 			Global.node_creation_parent.get_node("HUD/ShieldBar").value = shield_time
+		
+		if shield_time <= 30.0:
+			shield_blink += delta * 8.0
+			$Shield.visible = int(shield_blink) % 2 == 0
+		else:
+			$Shield.visible = true
+		
 		if shield_time <= 0:
 			shield_active = false
 			$Shield.visible = false
@@ -71,6 +79,7 @@ func _process(delta):
 func activate_shield():
 	shield_active = true
 	shield_time = 100.0
+	shield_blink = 0.0
 	$Shield.visible = true
 	$ShieldPickupSound.play()
 

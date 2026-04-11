@@ -12,7 +12,7 @@ script = ExtResource("1_vcqqu")
 shape = SubResource("RectangleShape2D_kyvak")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1188712904]
-modulate = Color(0, 0, 1, 1)
+modulate = Color(0.5093059, 0.66792184, 1, 1)
 position = Vector2(0.5000003, -1.7881395e-07)
 scale = Vector2(0.015509603, 0.0119976)
 texture = ExtResource("2_wh0le")
