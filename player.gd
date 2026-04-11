@@ -11,7 +11,8 @@ var stamina_regen = 20.0
 var dash_speed = 300.0
 var stamina_depleted = false
 var shield_active = false
-var shield_time = 11.0
+var shield_time = 0.0
+var shield_max = 100.0
 
 func _ready():
 	Global.player = self
@@ -49,19 +50,17 @@ func _process(delta):
 		global_position += current_speed * velocity * delta
 	
 	if Global.node_creation_parent != null:
-		var hud = Global.node_creation_parent.get_node("HUD/StaminaBar")
-		hud.value = stamina
+		Global.node_creation_parent.get_node("HUD/StaminaBar").value = stamina
 	
 	if shield_active:
-		shield_time -= delta
+		shield_time -= delta * 10.0
 		shield_time = max(shield_time, 0)
 		if Global.node_creation_parent != null:
-			Global.node_creation_parent.get_node("HUD/ShieldTimer").text = str(int(shield_time))
+			Global.node_creation_parent.get_node("HUD/ShieldBar").value = shield_time
 		if shield_time <= 0:
 			shield_active = false
 			$Shield.visible = false
-			if Global.node_creation_parent != null:
-				Global.node_creation_parent.get_node("HUD/ShieldTimer").text = ""
+			$ShieldBreakSound.play()
 	
 	if Input.is_action_pressed("click") and Global.node_creation_parent != null and can_shoot and is_dead == false:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
@@ -71,8 +70,9 @@ func _process(delta):
 
 func activate_shield():
 	shield_active = true
-	shield_time = 11.0
+	shield_time = 100.0
 	$Shield.visible = true
+	$ShieldPickupSound.play()
 
 func _on_Reload_speed_timeout():
 	can_shoot = true

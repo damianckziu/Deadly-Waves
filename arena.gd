@@ -4,6 +4,7 @@ var powerup_1 = preload("res://powerup.tscn")
 var current_wave = 0
 var enemies_alive = 0
 var spawning = false
+
 func _ready():
 	Global.node_creation_parent = self
 	Global.points = 0
@@ -11,20 +12,25 @@ func _ready():
 	$PauseMenu.visible = false
 	$PowerupSpawnTimer.start()
 	start_next_wave()
+
 func _exit_tree():
 	Global.node_creation_parent = null
+
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if get_tree().paused:
 			_resume()
 		else:
 			_pause()
+
 func _pause():
 	$PauseMenu.visible = true
 	get_tree().paused = true
+
 func _resume():
 	$PauseMenu.visible = false
 	get_tree().paused = false
+
 func start_next_wave():
 	current_wave += 1
 	Global.current_wave = current_wave
@@ -44,6 +50,7 @@ func start_next_wave():
 		await get_tree().create_timer(0.3).timeout
 	
 	spawning = false
+
 func get_enemy_type():
 	var roll = randf()
 	if current_wave >= 8:
@@ -60,6 +67,7 @@ func get_enemy_type():
 			return "fast"
 	else:
 		return "normal"
+
 func spawn_enemy(type):
 	var enemy_position = Vector2(randf_range(-160, 670), randf_range(-90, 390))
 	while enemy_position.x < 640 and enemy_position.x > -80 and enemy_position.y < 360 and enemy_position.y > -45:
@@ -88,18 +96,23 @@ func spawn_enemy(type):
 		e.modulate = Color("fd0043")
 		e.enemy_color = Color("fd0043")
 		e.points_value = 10
+
 func spawn_powerup():
 	var pos = Vector2(randf_range(50, 590), randf_range(50, 310))
 	Global.instance_node(powerup_1, pos, self)
+
 func enemy_died():
 	enemies_alive -= 1
 	if enemies_alive <= 0 and spawning == false:
 		await get_tree().create_timer(1.5).timeout
 		start_next_wave()
+
 func _on_wroc_pressed():
 	_resume()
+
 func _on_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://menu.tscn")
+
 func _on_powerup_spawn_timer_timeout():
 	spawn_powerup()

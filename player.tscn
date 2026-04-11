@@ -4,11 +4,13 @@
 [ext_resource type="Script" uid="uid://qamdbm4pyegc" path="res://player.gd" id="2_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://b4flnv8uq80yi" path="res://shoot.mp3" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://duxqgmea5dnvp" path="res://shield.gd" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://b3aiodn57ywm5" path="res://powerup.mp3" id="5_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://bm6ge045kpawk" path="res://powerup_pop.mp3" id="6_1jxqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
 
-[node name="Player" type="Sprite2D" unique_id=522150696]
+[node name="Player" type="Sprite2D" unique_id=522150696 groups=["Player"]]
 modulate = Color(0, 0, 1, 1)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_onrkg")
@@ -30,6 +32,14 @@ volume_db = -7.5
 
 [node name="Shield" type="Node2D" parent="." unique_id=852879179]
 script = ExtResource("4_hqtel")
+
+[node name="ShieldPickupSound" type="AudioStreamPlayer" parent="." unique_id=443777225]
+stream = ExtResource("5_2hs0m")
+volume_db = -20.0
+
+[node name="ShieldBreakSound" type="AudioStreamPlayer" parent="." unique_id=151884104]
+stream = ExtResource("6_1jxqw")
+volume_db = -20.0
 
 [connection signal="timeout" from="Reload_speed" to="." method="_on_Reload_speed_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

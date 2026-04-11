@@ -30,6 +30,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbtuc"]
+bg_color = Color(0, 0, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Arena" type="Node2D" unique_id=377620413]
 script = ExtResource("1_444vf")
 
@@ -125,16 +132,25 @@ theme_override_fonts/font = ExtResource("6_sbb53")
 text = "STAMINA"
 horizontal_alignment = 1
 
-[node name="ShieldTimer" type="Label" parent="HUD" unique_id=1133015791]
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 63.0
-offset_bottom = 40.0
-theme_override_colors/font_color = Color(0.23137255, 0.45882353, 1, 1)
+[node name="ShieldBar" type="ProgressBar" parent="HUD" unique_id=1652906615]
+offset_left = 20.0
+offset_top = 310.0
+offset_right = 270.0
+offset_bottom = 337.0
+scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("6_sbb53")
-theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_sbb53")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pbtuc")
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/ShieldBar" unique_id=1447834113]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 250.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("6_sbb53")
+text = "TARCZA"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1579861754]
 process_mode = 3
