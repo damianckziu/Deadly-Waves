@@ -1,22 +1,22 @@
 extends Sprite2D
-
 var speed = 150
 var velocity = Vector2()
-
 var bullet = preload("res://bullet.tscn")
 var blood_particles = preload("res://blood_particles.tscn")
-
 var can_shoot = true
 var is_dead = false
-
 var stamina = 100.0
 var stamina_drain = 40.0
 var stamina_regen = 20.0
 var dash_speed = 300.0
 var stamina_depleted = false
+var shield_active = false
+var shield_time = 11.0
 
 func _ready():
 	Global.player = self
+	add_to_group("Player")
+	$Shield.visible = false
 
 func _exit_tree():
 	Global.player = null
@@ -52,17 +52,33 @@ func _process(delta):
 		var hud = Global.node_creation_parent.get_node("HUD/StaminaBar")
 		hud.value = stamina
 	
+	if shield_active:
+		shield_time -= delta
+		shield_time = max(shield_time, 0)
+		if Global.node_creation_parent != null:
+			Global.node_creation_parent.get_node("HUD/ShieldTimer").text = str(int(shield_time))
+		if shield_time <= 0:
+			shield_active = false
+			$Shield.visible = false
+			if Global.node_creation_parent != null:
+				Global.node_creation_parent.get_node("HUD/ShieldTimer").text = ""
+	
 	if Input.is_action_pressed("click") and Global.node_creation_parent != null and can_shoot and is_dead == false:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
 		$ShootSound.play()
 		$Reload_speed.start()
 		can_shoot = false
 
+func activate_shield():
+	shield_active = true
+	shield_time = 11.0
+	$Shield.visible = true
+
 func _on_Reload_speed_timeout():
 	can_shoot = true
 
 func _on_hitbox_area_entered(area):
-	if area.is_in_group("Enemy") and is_dead == false:
+	if area.is_in_group("Enemy") and is_dead == false and shield_active == false:
 		is_dead = true
 		visible = false
 		

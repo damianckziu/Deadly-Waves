@@ -3,6 +3,7 @@ var speed = 75
 var velocity = Vector2()
 var stun = false
 var hp = 3
+var points_value = 10
 var blood_particles = preload("res://blood_particles.tscn")
 var enemy_color = Color("fd0043")
 func _ready():
@@ -16,7 +17,7 @@ func _process(delta):
 	global_position += velocity * speed * delta
 	 
 	if hp <= 0:
-		Global.points += 10
+		Global.points += points_value
 		if Global.arena != null:
 			Global.arena.get_node("DeathSound").play()
 			Global.arena.enemy_died()
@@ -38,7 +39,7 @@ func _on_stun_timer_timeout():
 	if speed >= 100:
 		enemy_color = Color("ffd700")
 		modulate = Color("ffd700")
-	elif speed <= 40:
+	elif speed <= 50:
 		enemy_color = Color("9b30ff")
 		modulate = Color("9b30ff")
 	else:

@@ -125,6 +125,17 @@ theme_override_fonts/font = ExtResource("6_sbb53")
 text = "STAMINA"
 horizontal_alignment = 1
 
+[node name="ShieldTimer" type="Label" parent="HUD" unique_id=1133015791]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 63.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.23137255, 0.45882353, 1, 1)
+theme_override_fonts/font = ExtResource("6_sbb53")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1579861754]
 process_mode = 3
 
@@ -171,7 +182,12 @@ volume_db = -27.5
 stream = ExtResource("7_pbtuc")
 volume_db = -5.0
 
+[node name="PowerupSpawnTimer" type="Timer" parent="." unique_id=1942564463]
+wait_time = 45.0
+autostart = true
+
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
 [connection signal="pressed" from="PauseMenu/Button" to="." method="_on_wroc_pressed"]
 [connection signal="pressed" from="PauseMenu/Button2" to="." method="_on_menu_pressed"]
+[connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_powerup_spawn_timer_timeout"]

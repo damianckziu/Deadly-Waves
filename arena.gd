@@ -1,5 +1,6 @@
 extends Node2D
 var enemy_1 = preload("res://enemy.tscn")
+var powerup_1 = preload("res://powerup.tscn")
 var current_wave = 0
 var enemies_alive = 0
 var spawning = false
@@ -8,6 +9,7 @@ func _ready():
 	Global.points = 0
 	Global.arena = self
 	$PauseMenu.visible = false
+	$PowerupSpawnTimer.start()
 	start_next_wave()
 func _exit_tree():
 	Global.node_creation_parent = null
@@ -71,18 +73,24 @@ func spawn_enemy(type):
 		e.scale = Vector2(1.0, 1.0)
 		e.modulate = Color("ffd700")
 		e.enemy_color = Color("ffd700")
+		e.points_value = 15
 	elif type == "big":
-		e.speed = 40
+		e.speed = 50
 		e.hp = 5
 		e.scale = Vector2(2.5, 2.5)
 		e.modulate = Color("9b30ff")
 		e.enemy_color = Color("9b30ff")
+		e.points_value = 20
 	else:
 		e.speed = 75
 		e.hp = 3
 		e.scale = Vector2(1.5, 1.5)
 		e.modulate = Color("fd0043")
 		e.enemy_color = Color("fd0043")
+		e.points_value = 10
+func spawn_powerup():
+	var pos = Vector2(randf_range(50, 590), randf_range(50, 310))
+	Global.instance_node(powerup_1, pos, self)
 func enemy_died():
 	enemies_alive -= 1
 	if enemies_alive <= 0 and spawning == false:
@@ -93,3 +101,5 @@ func _on_wroc_pressed():
 func _on_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://menu.tscn")
+func _on_powerup_spawn_timer_timeout():
+	spawn_powerup()
