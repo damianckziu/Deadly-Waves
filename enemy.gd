@@ -1,12 +1,8 @@
 extends Sprite2D
-
 var speed = 75
-
 var velocity = Vector2()
-
 var stun = false
 var hp = 3
-
 var blood_particles = preload("res://blood_particles.tscn")
 
 func _process(delta):
@@ -21,6 +17,7 @@ func _process(delta):
 		Global.points += 10
 		if Global.arena != null:
 			Global.arena.get_node("DeathSound").play()
+			Global.arena.enemy_died()
 		if Global.node_creation_parent != null:
 			var blood_particles_instance = Global.instance_node(blood_particles, global_position, Global.node_creation_parent)
 			blood_particles_instance.rotation = velocity.angle()
