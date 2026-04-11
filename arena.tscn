@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cfgux14nfp60y" path="res://death.mp3" id="6_pbtuc"]
 [ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="6_sbb53"]
 [ext_resource type="AudioStream" uid="uid://bchtttllrlfb3" path="res://lose.mp3" id="7_pbtuc"]
+[ext_resource type="AudioStream" uid="uid://b37455pjbviq" path="res://music.mp3" id="8_yokb4"]
 
 [sub_resource type="Environment" id="Environment_444vf"]
 background_mode = 3
@@ -190,6 +191,22 @@ theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 32
 text = "MENU"
 
+[node name="MusicButton" type="Button" parent="PauseMenu" unique_id=1215441575]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -19.5
+offset_right = 68.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_sbb53")
+text = "MUZYKA: ON"
+
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=148093410]
 stream = ExtResource("6_pbtuc")
 volume_db = -27.5
@@ -202,8 +219,15 @@ volume_db = -5.0
 wait_time = 45.0
 autostart = true
 
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1542087713]
+stream = ExtResource("8_yokb4")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
 [connection signal="pressed" from="PauseMenu/Button" to="." method="_on_wroc_pressed"]
 [connection signal="pressed" from="PauseMenu/Button2" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="PauseMenu/MusicButton" to="." method="_on_music_button_pressed"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_powerup_spawn_timer_timeout"]

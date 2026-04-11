@@ -4,6 +4,7 @@ var powerup_1 = preload("res://powerup.tscn")
 var current_wave = 0
 var enemies_alive = 0
 var spawning = false
+var music_on = true
 
 func _ready():
 	Global.node_creation_parent = self
@@ -116,3 +117,12 @@ func _on_menu_pressed():
 
 func _on_powerup_spawn_timer_timeout():
 	spawn_powerup()
+
+func _on_music_button_pressed():
+	music_on = !music_on
+	if music_on:
+		$Music.play()
+		$PauseMenu/MusicButton.text = "MUZYKA: ON"
+	else:
+		$Music.stop()
+		$PauseMenu/MusicButton.text = "MUZYKA: OFF"
