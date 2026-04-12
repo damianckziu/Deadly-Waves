@@ -19,9 +19,11 @@ var enemies_in_hitbox = []
 
 func _ready():
 	Global.player = self
-	Global.hp = 3
+	Global.hp = 1 if Global.hardcore else 3
 	add_to_group("Player")
 	$Shield.visible = false
+	if Global.hardcore and Global.node_creation_parent != null:
+		Global.node_creation_parent.get_node("HUD/ShieldBar").visible = false
 
 func _exit_tree():
 	Global.player = null
@@ -105,14 +107,23 @@ func take_damage():
 
 func update_hearts():
 	var hearts = Global.node_creation_parent.get_node("HUD/Hearts")
-	for i in range(3):
-		var heart = hearts.get_child(i)
-		if i < Global.hp:
+	if Global.hardcore:
+		var heart = hearts.get_node("Heart3")
+		if Global.hp >= 1:
 			heart.modulate.a = 1.0
 			heart.scale = Vector2(0.015, 0.015)
 		else:
 			heart.modulate.a = 0.3
 			heart.scale = Vector2(0.012, 0.012)
+	else:
+		for i in range(3):
+			var heart = hearts.get_child(i)
+			if i < Global.hp:
+				heart.modulate.a = 1.0
+				heart.scale = Vector2(0.015, 0.015)
+			else:
+				heart.modulate.a = 0.3
+				heart.scale = Vector2(0.012, 0.012)
 
 func activate_shield():
 	shield_active = true

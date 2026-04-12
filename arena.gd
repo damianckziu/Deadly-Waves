@@ -10,14 +10,25 @@ func _ready():
 	Global.node_creation_parent = self
 	Global.points = 0
 	Global.arena = self
+	Global.enemies_killed = 0
+	Global.game_time = 0.0
 	$PauseMenu.visible = false
-	$PowerupSpawnTimer.start()
+	$HUD/WaveCounter.text = "FALA 0"
+	if Global.hardcore:
+		$HUD/ShieldBar.visible = false
+		$HUD/Hearts/Heart1.visible = false
+		$HUD/Hearts/Heart2.visible = false
+		$PowerupSpawnTimer.stop()
+	else:
+		$PowerupSpawnTimer.start()
 	start_next_wave()
 
 func _exit_tree():
 	Global.node_creation_parent = null
 
 func _process(delta):
+	if not get_tree().paused:
+		Global.game_time += delta
 	if Input.is_action_just_pressed("ui_cancel"):
 		if get_tree().paused:
 			_resume()
@@ -35,12 +46,15 @@ func _resume():
 func start_next_wave():
 	current_wave += 1
 	Global.current_wave = current_wave
+	$HUD/WaveCounter.text = "FALA: " + str(current_wave)
 	spawning = true
 	
 	$HUD/WaveLabel.text = "FALA " + str(current_wave)
 	$HUD/WaveLabel.visible = true
+	$HUD/WaveCounter.visible = false
 	await get_tree().create_timer(2.0).timeout
 	$HUD/WaveLabel.visible = false
+	$HUD/WaveCounter.visible = true
 	
 	var enemies_to_spawn = 3 + (current_wave * 2)
 	enemies_alive = enemies_to_spawn
@@ -104,6 +118,7 @@ func spawn_powerup():
 
 func enemy_died():
 	enemies_alive -= 1
+	Global.enemies_killed += 1
 	if enemies_alive <= 0 and spawning == false:
 		await get_tree().create_timer(1.5).timeout
 		start_next_wave()

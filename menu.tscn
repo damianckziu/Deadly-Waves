@@ -21,15 +21,25 @@ theme_override_font_sizes/font_size = 48
 text = "DEADLY WAVES"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="." unique_id=1138039236]
-offset_left = 221.0
-offset_top = 145.0
-offset_right = 419.0
-offset_bottom = 194.0
+[node name="NormalButton" type="Button" parent="." unique_id=930700796]
+offset_left = 90.0
+offset_top = 125.0
+offset_right = 264.0
+offset_bottom = 169.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_ouk20")
-theme_override_font_sizes/font_size = 36
-text = "ZAGRAJ
-"
+theme_override_font_sizes/font_size = 32
+text = "NORMAL"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="HardcoreButton" type="Button" parent="." unique_id=2099736119]
+offset_left = 326.0
+offset_top = 125.0
+offset_right = 559.0
+offset_bottom = 169.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 32
+text = "HARDCORE"
+
+[connection signal="pressed" from="NormalButton" to="." method="_on_normal_button_pressed"]
+[connection signal="pressed" from="HardcoreButton" to="." method="_on_hardcore_button_pressed"]

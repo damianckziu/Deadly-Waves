@@ -175,6 +175,16 @@ position = Vector2(95.5, 18)
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("6_35c7g")
 
+[node name="WaveCounter" type="Label" parent="HUD" unique_id=2130942120]
+offset_left = 285.0
+offset_top = 294.0
+offset_right = 357.0
+offset_bottom = 313.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_sbb53")
+theme_override_font_sizes/font_size = 16
+text = "FALA 1"
+
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1579861754]
 process_mode = 3
 visible = false

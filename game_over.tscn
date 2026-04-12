@@ -24,29 +24,56 @@ horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=1831668122]
 offset_left = 98.0
-offset_top = 145.0
+offset_top = 100.0
 offset_right = 542.0
-offset_bottom = 194.0
+offset_bottom = 149.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_yxx3c")
 theme_override_font_sizes/font_size = 36
 text = "ZAGRAJ PONOWNIE
 "
 
-[node name="PointsLabel" type="Label" parent="." unique_id=1457846561]
-offset_top = 229.0
-offset_right = 640.0
-offset_bottom = 265.0
+[node name="MenuButton" type="Button" parent="." unique_id=145871700]
+offset_left = 252.5
+offset_top = 160.0
+offset_right = 387.5
+offset_bottom = 209.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_yxx3c")
-theme_override_font_sizes/font_size = 32
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+text = "MENU"
 
-[node name="WaveLabel" type="Label" parent="." unique_id=959875118]
-offset_top = 292.0
+[node name="StatsButton" type="Button" parent="." unique_id=1924955427]
+offset_left = 191.0
+offset_top = 250.0
+offset_right = 449.0
+offset_bottom = 294.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+text = "STATYSTYKI"
+
+[node name="StatsPanel" type="Panel" parent="." unique_id=1823948196]
 offset_right = 640.0
-offset_bottom = 328.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="StatsPanel" unique_id=1263778281]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="StatsLabel" type="Label" parent="StatsPanel" unique_id=2329543]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 93.0
+offset_right = 533.0
+offset_bottom = 267.0
 theme_override_fonts/font = ExtResource("2_yxx3c")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="StatsButton" to="." method="_on_stats_button_pressed"]
