@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://duxqgmea5dnvp" path="res://shield.gd" id="4_hqtel"]
 [ext_resource type="AudioStream" uid="uid://b3aiodn57ywm5" path="res://powerup.mp3" id="5_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://bm6ge045kpawk" path="res://powerup_pop.mp3" id="6_1jxqw"]
+[ext_resource type="AudioStream" uid="uid://b7vmoq3om76te" path="res://damage.mp3" id="7_1jxqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
@@ -41,5 +42,10 @@ volume_db = -20.0
 stream = ExtResource("6_1jxqw")
 volume_db = -20.0
 
+[node name="DamageSound" type="AudioStreamPlayer" parent="." unique_id=1054913025]
+stream = ExtResource("7_1jxqw")
+volume_db = -20.0
+
 [connection signal="timeout" from="Reload_speed" to="." method="_on_Reload_speed_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

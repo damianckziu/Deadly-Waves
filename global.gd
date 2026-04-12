@@ -5,6 +5,7 @@ var arena = null
 var points = 0
 var highscore = 0
 var current_wave = 0
+var hp = 3
 
 func _ready():
 	load_highscore()

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dwnojc7xl5qct" path="res://player.tscn" id="2_27ga2"]
 [ext_resource type="Script" uid="uid://df5tjburwjvqv" path="res://score.gd" id="4_h0wof"]
 [ext_resource type="Script" uid="uid://8goa4847mfwu" path="res://highscore.gd" id="5_fu4bq"]
+[ext_resource type="Texture2D" uid="uid://bfie8tlxotoo0" path="res://heart.png" id="6_35c7g"]
 [ext_resource type="AudioStream" uid="uid://cfgux14nfp60y" path="res://death.mp3" id="6_pbtuc"]
 [ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="6_sbb53"]
 [ext_resource type="AudioStream" uid="uid://bchtttllrlfb3" path="res://lose.mp3" id="7_pbtuc"]
@@ -153,8 +154,30 @@ theme_override_fonts/font = ExtResource("6_sbb53")
 text = "TARCZA"
 horizontal_alignment = 1
 
+[node name="Hearts" type="HBoxContainer" parent="HUD" unique_id=749685799]
+offset_left = 503.0
+offset_top = 309.0
+offset_right = 619.0
+offset_bottom = 344.0
+
+[node name="Heart1" type="Sprite2D" parent="HUD/Hearts" unique_id=1811924433]
+position = Vector2(21, 18)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("6_35c7g")
+
+[node name="Heart2" type="Sprite2D" parent="HUD/Hearts" unique_id=487405665]
+position = Vector2(58, 18)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("6_35c7g")
+
+[node name="Heart3" type="Sprite2D" parent="HUD/Hearts" unique_id=1395210127]
+position = Vector2(95.5, 18)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("6_35c7g")
+
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1579861754]
 process_mode = 3
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu" unique_id=272368556]
 offset_right = 640.0
