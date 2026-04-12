@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://jeexf2djh3s1" path="res://menu.gd" id="1_ouk20"]
 [ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="2_ouk20"]
+[ext_resource type="AudioStream" uid="uid://mtbp6wddle1l" path="res://typing.mp3" id="3_mae5d"]
+[ext_resource type="AudioStream" uid="uid://plfvv8jxo47k" path="res://menu.mp3" id="4_4hy44"]
 
 [node name="menu" type="Node2D" unique_id=66096135]
 script = ExtResource("1_ouk20")
@@ -41,5 +43,44 @@ theme_override_fonts/font = ExtResource("2_ouk20")
 theme_override_font_sizes/font_size = 32
 text = "HARDCORE"
 
+[node name="ResetButton" type="Button" parent="." unique_id=576983038]
+offset_left = 130.0
+offset_top = 260.0
+offset_right = 510.0
+offset_bottom = 304.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 32
+text = "RESETUJ REKORD"
+
+[node name="NormalHighscore" type="Label" parent="." unique_id=1968970573]
+offset_left = 122.0
+offset_top = 186.0
+offset_right = 225.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="HardcoreHighscore" type="Label" parent="." unique_id=394820422]
+offset_left = 420.0
+offset_top = 186.0
+offset_right = 466.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("2_ouk20")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="TypingSound" type="AudioStreamPlayer" parent="." unique_id=4238940]
+stream = ExtResource("3_mae5d")
+volume_db = -20.0
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1579908176]
+stream = ExtResource("4_4hy44")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
 [connection signal="pressed" from="NormalButton" to="." method="_on_normal_button_pressed"]
 [connection signal="pressed" from="HardcoreButton" to="." method="_on_hardcore_button_pressed"]
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

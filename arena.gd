@@ -52,8 +52,23 @@ func start_next_wave():
 	$HUD/WaveLabel.text = "FALA " + str(current_wave)
 	$HUD/WaveLabel.visible = true
 	$HUD/WaveCounter.visible = false
-	await get_tree().create_timer(2.0).timeout
+	
+	var center_x = $HUD/WaveLabel.position.x
+	$HUD/WaveLabel.position.x = -400
+	var tween_in = create_tween()
+	tween_in.set_pause_mode(Tween.TWEEN_PAUSE_BOUND)
+	tween_in.tween_property($HUD/WaveLabel, "position:x", center_x, 0.8).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	await tween_in.finished
+
+	await get_tree().create_timer(1.2, true).timeout
+
+	var tween_out = create_tween()
+	tween_out.set_pause_mode(Tween.TWEEN_PAUSE_BOUND)
+	tween_out.tween_property($HUD/WaveLabel, "position:x", 800, 0.8).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+	await tween_out.finished
+	
 	$HUD/WaveLabel.visible = false
+	$HUD/WaveLabel.position.x = center_x
 	$HUD/WaveCounter.visible = true
 	
 	var enemies_to_spawn = 3 + (current_wave * 2)
@@ -62,7 +77,7 @@ func start_next_wave():
 	for i in range(enemies_to_spawn):
 		var type = get_enemy_type()
 		spawn_enemy(type)
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.3, true).timeout
 	
 	spawning = false
 
@@ -120,7 +135,7 @@ func enemy_died():
 	enemies_alive -= 1
 	Global.enemies_killed += 1
 	if enemies_alive <= 0 and spawning == false:
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(1.5, true).timeout
 		start_next_wave()
 
 func _on_wroc_pressed():
@@ -141,3 +156,36 @@ func _on_music_button_pressed():
 	else:
 		$Music.stop()
 		$PauseMenu/MusicButton.text = "MUZYKA: OFF"
+
+func shake_camera():
+	var tween = create_tween()
+	tween.tween_property($Camera2D, "offset", Vector2(10, 5), 0.05)
+	tween.tween_property($Camera2D, "offset", Vector2(-10, -5), 0.05)
+	tween.tween_property($Camera2D, "offset", Vector2(8, -4), 0.05)
+	tween.tween_property($Camera2D, "offset", Vector2(-8, 4), 0.05)
+	tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+
+func flash_screen(color: Color):
+	$HUD/FlashRect.modulate = color
+	$HUD/FlashRect.modulate.a = 0.6
+	var tween = create_tween()
+	tween.tween_property($HUD/FlashRect, "modulate:a", 0.0, 0.4)
+
+func enemies_run_away():
+	for child in get_children():
+		if child is Sprite2D and child.has_method("run_away"):
+			child.run_away()
+
+func show_new_record():
+	$HUD/NewRecordLabel.text = "NOWY REKORD!"
+	if Global.hardcore:
+		$HUD/NewRecordLabel.add_theme_color_override("font_color", Color("ff0000"))
+	else:
+		$HUD/NewRecordLabel.add_theme_color_override("font_color", Color("ffd700"))
+	$HUD/NewRecordLabel.modulate.a = 0.0
+	$HUD/NewRecordLabel.visible = true
+	var tween = create_tween()
+	tween.tween_property($HUD/NewRecordLabel, "modulate:a", 1.0, 0.5)
+	tween.tween_interval(2.0)
+	tween.tween_property($HUD/NewRecordLabel, "modulate:a", 0.0, 0.5)
+	tween.tween_callback($HUD/NewRecordLabel.hide)

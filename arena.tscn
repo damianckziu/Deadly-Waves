@@ -185,6 +185,20 @@ theme_override_fonts/font = ExtResource("6_sbb53")
 theme_override_font_sizes/font_size = 16
 text = "FALA 1"
 
+[node name="FlashRect" type="ColorRect" parent="HUD" unique_id=40816736]
+modulate = Color(1, 1, 1, 0)
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.50980395, 0.6666667, 1, 1)
+
+[node name="NewRecordLabel" type="Label" parent="HUD" unique_id=341457527]
+offset_left = 207.5
+offset_top = 53.0
+offset_right = 432.5
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("6_sbb53")
+theme_override_font_sizes/font_size = 24
+
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1579861754]
 process_mode = 3
 visible = false
@@ -257,6 +271,9 @@ stream = ExtResource("8_yokb4")
 volume_db = -20.0
 autoplay = true
 parameters/looping = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1019513109]
+position = Vector2(320, 180)
 
 [connection signal="timeout" from="Enemy_spawn_timer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="Difficulty_timer" to="." method="_on_difficulty_timer_timeout"]

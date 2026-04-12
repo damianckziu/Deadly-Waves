@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csepika21ml6q" path="res://game_over.gd" id="1_yxx3c"]
 [ext_resource type="FontFile" uid="uid://53bfm1uttdtl" path="res://ka1.ttf" id="2_yxx3c"]
+[ext_resource type="AudioStream" uid="uid://plfvv8jxo47k" path="res://menu.mp3" id="3_ccer4"]
 
 [node name="game_over" type="Node2D" unique_id=2029672100]
 script = ExtResource("1_yxx3c")
@@ -74,6 +75,24 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StatsMenuButton" type="Button" parent="StatsPanel" unique_id=773183940]
+layout_mode = 0
+offset_left = 259.5
+offset_top = 280.0
+offset_right = 380.5
+offset_bottom = 324.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_yxx3c")
+theme_override_font_sizes/font_size = 32
+text = "MENU"
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1521454672]
+stream = ExtResource("3_ccer4")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="StatsButton" to="." method="_on_stats_button_pressed"]
+[connection signal="pressed" from="StatsPanel/StatsMenuButton" to="." method="_on_stats_menu_button_pressed"]

@@ -79,7 +79,7 @@ func _process(delta):
 			$Shield.visible = false
 			$ShieldBreakSound.play()
 	
-	if Input.is_action_pressed("click") and Global.node_creation_parent != null and can_shoot and is_dead == false:
+	if Input.is_action_pressed("click") and Global.node_creation_parent != null and can_shoot and is_dead == false and invincible == false:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
 		$ShootSound.play()
 		$Reload_speed.start()
@@ -88,6 +88,9 @@ func _process(delta):
 func take_damage():
 	Global.hp -= 1
 	$DamageSound.play()
+	if Global.arena != null:
+		Global.arena.shake_camera()
+		Global.arena.flash_screen(Color("ff0000"))
 	if Global.hp <= 0:
 		is_dead = true
 		visible = false
@@ -96,6 +99,11 @@ func take_damage():
 			var blood = Global.instance_node(blood_particles, global_position, Global.node_creation_parent)
 			blood.color = Color("006ac4c8")
 			blood.rotation = velocity.angle()
+		if Global.arena != null:
+			Global.arena.enemies_run_away()
+		Engine.time_scale = 0.2
+		await get_tree().create_timer(0.3).timeout
+		Engine.time_scale = 1.0
 		await get_tree().create_timer(2).timeout
 		get_tree().change_scene_to_file("res://game_over.tscn")
 	else:
@@ -131,6 +139,8 @@ func activate_shield():
 	shield_blink = 0.0
 	$Shield.visible = true
 	$ShieldPickupSound.play()
+	if Global.arena != null:
+		Global.arena.flash_screen(Color("82aaff"))
 
 func _on_Reload_speed_timeout():
 	can_shoot = true
